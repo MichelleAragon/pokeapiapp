@@ -1,56 +1,26 @@
 <script setup>
-import PokemonsList from "./components/PokemonsList.vue";
+import { ref, onMounted } from "vue";
+import { getPokemonByName } from "./utils/axios";
+import PokemonList from "./components/PokemonsList.vue";
+import SearchPokemon from "./components/SearchPokemon.vue";
 
-import axiosClient from "./utils/axios";
-import { onMounted, ref } from "vue";
-
-const pokemons = ref([]);
-const searchTerm = ref("");
+const pokemonData = ref([]);
 const filteredPokemons = ref([]);
+const searchTerm = ref('');
 
-const getPokemons = async () => {
-  try {
-    const { data } = await axiosClient.get("/pokemon");
-    pokemons.value = data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-onMounted(() => {
-  getPokemons();
+onMounted(async () => {
+  pokemonData.value = await getPokemonByName();
 });
 
-// const filterPokemons = () => {
-//   const searchValue = searchTerm.value.toLowerCase();
-  
-//   filteredPokemons.value = pokemons.value.results.filter((pokemon) =>
-//     pokemon.name.toLowerCase().includes(searchValue)
-//   ).map((pokemon) => pokemon.name);
-  
-//   console.log(filteredPokemons.value);
-// }
-const filterPokemons = () => {
-  const searchValue = searchTerm.value.toLowerCase();
-  
-  filteredPokemons.value = pokemons.value.results.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(searchValue)
-  ).map((pokemon) => pokemon.name);
-  
-  console.log(filteredPokemons.value);
-}
+const handleFilteredPokemons = (filteredPokemonsData) => {
+  filteredPokemons.value = filteredPokemonsData;
+};
 
 </script>
 
 <template>
   <div class="mx-auto px-[30px] md:px-0 md:max-w-[560px]">
-    <input
-      type="text"
-      placeholder="Search"
-      class="w-full mb-2.5 h-[60px]"
-      v-model="searchTerm"
-      @input="filterPokemons"
-    />
-    <PokemonsList :pokemons="filteredPokemons"  :searchTerm="searchTerm"/>
+    <SearchPokemon :pokemonData="pokemonData" v-model:searchTerm="searchTerm" @update:filteredPokemons="handleFilteredPokemons" />
+    <PokemonList :pokemonData="filteredPokemons" />
   </div>
 </template>

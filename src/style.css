@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply bg-customWhite font-custom;
+* {
+    @apply font-sans bg-customWhite;
 }
 
-
+.primary-buttons {
+    padding: 11px 20px;
+}
