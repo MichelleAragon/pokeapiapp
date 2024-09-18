@@ -1,5 +1,4 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
@@ -19,7 +18,7 @@ export default {
         white: '#FFFFFF'
       },
       fontFamily: {
-        custom: ['Lato'],
+        sans: ['Lato']
       },
       fontSize: {
         sm: '16px',
@@ -27,7 +26,10 @@ export default {
         xl: '20px',
         '2xl': '22px',
         '3xl': '36px',
-      }
+      },
+      spacing: {
+        'paddingButtons': '11px 20px',  // Corrección del nombre de la clase
+      },
     },
   },
   plugins: [],

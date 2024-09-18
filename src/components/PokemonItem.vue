@@ -27,7 +27,7 @@ const props = defineProps(["pokemon"]);
       viewBox="0 0 44 44"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+      class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 bg-white top-1/2 left-1/2"
     >
       <circle cx="22" cy="22" r="22" fill="#F5F5F5" />
     </svg>
