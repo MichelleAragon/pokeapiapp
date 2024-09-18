@@ -1,12 +1,23 @@
 <script setup>
-import { defineProps } from "vue";
+// Importar el store
+import { useStore } from 'vuex';
 
+// Props
 const props = defineProps(["pokemon"]);
+
+// Acceder al store
+const store = useStore();
+
+// Método para agregar a favoritos
+const addToFavorites = (pokemon) => {
+  store.commit('addToFavorites', pokemon);
+  console.log("Agregando a favoritos:", pokemon);
+}
 </script>
 
 <template>
   {{ pokemon.name }}
-  <button class="relative right-8">
+  <button class="relative right-8" @click="() => addToFavorites(pokemon)">
     <svg
       width="26"
       height="26"
