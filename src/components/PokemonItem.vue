@@ -1,16 +1,21 @@
 <script setup>
-// Importar el store
-import { useStore } from 'vuex';
 import { defineProps } from 'vue';
 
 const props = defineProps({
-  pokemon: Object,
-  addOrRemoveFavorite: Function,
-  isFavorite: Boolean
+  pokemon: {
+    type: Object,
+    required: true,
+  },
+  isFavorite: {
+    type: Boolean,
+    default: false,
+  },
+  addOrRemoveFavorite: {
+    type: Function,
+    required: true,
+  },
 });
 
-// Acceder al store
-const store = useStore();
 
 </script>
 

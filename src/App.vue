@@ -5,18 +5,23 @@ import PokemonList from "./components/PokemonsList.vue";
 import SearchPokemon from "./components/SearchPokemon.vue";
 import LoadingSpinner from "./components/LoadingSpinner.vue";
 import FavoritePokemonList from './components/FavoritePokemonList.vue';
+import EmptyList from './components/EmptyList.vue';
 
+// Data
 const pokemonData = ref([]);
 const filteredPokemons = ref([]);
 const searchTerm = ref("");
 const isLoading = ref(true);
 const selectedFavoritesPokemons = ref([]);
 
+// View State
+const currentView = ref('all'); // 'all' or 'favorites'
+
 onMounted(async () => {
   setTimeout(async () => {
     pokemonData.value = await getPokemonByName();
     isLoading.value = false;
-  }, 6000);
+  }, 2500);
 });
 
 const handleFilteredPokemons = (filteredPokemonsData) => {
@@ -33,9 +38,15 @@ const addOrRemoveFavorite = (pokemon) => {
   }
 };
 
+// Button Handlers to Switch Views
+const showAllPokemons = () => {
+  currentView.value = 'all';
+};
 
+const showFavoritePokemons = () => {
+  currentView.value = 'favorites';
+};
 </script>
-
 <template>
   <div class="mx-auto px-[30px] md:px-0 md:max-w-[560px]">
     <template v-if="isLoading">
@@ -47,11 +58,56 @@ const addOrRemoveFavorite = (pokemon) => {
         v-model:searchTerm="searchTerm"
         @update:filteredPokemons="handleFilteredPokemons"
       />
-      <PokemonList :pokemonData="filteredPokemons" :selectedFavoritesPokemons="selectedFavoritesPokemons" :addOrRemoveFavorite="addOrRemoveFavorite"/>
+
+      <!-- All Pokémons View -->
+      <div v-if="currentView === 'all'">
+        <template v-if="searchTerm">
+          <template v-if="filteredPokemons.length > 0">
+            <PokemonList 
+              :pokemonData="filteredPokemons"
+              :selectedFavoritesPokemons="selectedFavoritesPokemons" 
+              :addOrRemoveFavorite="addOrRemoveFavorite"
+            />
+          </template>
+          <template v-else>
+            <EmptyList />
+          </template>
+        </template>
+        <template v-else>
+          <PokemonList 
+            :pokemonData="pokemonData"
+            :selectedFavoritesPokemons="selectedFavoritesPokemons" 
+            :addOrRemoveFavorite="addOrRemoveFavorite"
+          />
+          <EmptyList v-if="pokemonData.length === 0"/>
+        </template>
+      </div>
+
+      <!-- Favorites View -->
+      <div v-else>
+       <FavoritePokemonList
+          :favoritePokemons="selectedFavoritesPokemons"
+          :addOrRemoveFavorite="addOrRemoveFavorite"
+        />
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="fixed bottom-0 left-0 right-0 flex justify-around p-4 bg-white shadow-md">
+        <button
+          @click="showAllPokemons"
+          :class="{'bg-primary': currentView === 'all'}"
+          class="px-4 py-2 rounded-md"
+        >
+          ALL
+        </button>
+        <button
+          @click="showFavoritePokemons"
+          :class="{'bg-primary': currentView === 'favorites'}"
+          class="px-4 py-2 rounded-md"
+        >
+          Favorites
+        </button>
+      </div>
     </template>
-    <FavoritePokemonList :pokemonData="selectedFavoritesPokemons" />
   </div>
 </template>
-
-
-
