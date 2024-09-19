@@ -1,9 +1,24 @@
 <script setup>
 import PokemonItem from "./PokemonItem.vue";
 import EmptyList from "./EmptyList.vue";
+import { ref } from 'vue';
+import PokemonModal from './PokemonModal.vue';
 import { defineProps } from 'vue';
 
 const props = defineProps(["favoritePokemons", "addOrRemoveFavorite"]);
+
+const selectedPokemon = ref(null);
+const isModalVisible = ref(false);
+
+const openModal = (pokemon) => {
+  selectedPokemon.value = pokemon;
+  isModalVisible.value = true;
+};
+
+const closeModal = () => {
+  isModalVisible.value = false;
+  selectedPokemon.value = null;
+};
 </script>
 
 <template>
@@ -20,11 +35,20 @@ const props = defineProps(["favoritePokemons", "addOrRemoveFavorite"]);
         <PokemonItem 
           :pokemon="pokemon" 
           :isFavorite="true"
+          :openModal="openModal"
           :addOrRemoveFavorite="addOrRemoveFavorite"
         />
       </li>
     </ul>
   </div>
+    <PokemonModal
+    v-if="selectedPokemon"
+    :pokemon="selectedPokemon"
+    :isFavorite="favoritePokemons.some(p => p.name === selectedPokemon.name)"
+    :show="isModalVisible"
+    :close="closeModal"
+    :toggleFavorite="addOrRemoveFavorite"
+  />
 </template>
 
 

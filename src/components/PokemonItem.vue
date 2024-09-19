@@ -14,13 +14,16 @@ const props = defineProps({
     type: Function,
     required: true,
   },
+  openModal: {
+    type: Function,
+    required: true,
+  },
 });
-
 
 </script>
 
 <template>
-  <p class="bg-white">{{ pokemon.name }}</p>
+  <p @click="() => openModal(pokemon)" class="w-full bg-white cursor-pointer">{{ pokemon.name }}</p>
   <button class="relative bg-white right-8" @click="addOrRemoveFavorite(pokemon)">
     <svg
       width="26"
