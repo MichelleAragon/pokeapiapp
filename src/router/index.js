@@ -13,10 +13,16 @@ const routes = [
     name: 'Pokemons',
     component: PokemonsView,
   },
+  // Agregar una ruta catch-all para manejar rutas no encontradas
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('../views/NotFound.vue')
+  }
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/pokeapiapp/'),
   routes,
 });
 

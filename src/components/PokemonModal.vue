@@ -59,7 +59,7 @@ const sharePokemon = () => {
       <!-- Pokemon Image with Background -->
       <div
         class="relative h-48 overflow-hidden bg-center bg-cover rounded-t-2xl"
-        style="background-image: url('/src/assets/mask-image-modal.png')"
+        :style="{ backgroundImage: `url(${backgroundImage})` }"
       >
         <img
           :src="pokemon.sprites.other['official-artwork'].front_default"
