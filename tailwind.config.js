@@ -25,10 +25,10 @@ module.exports = {
         base: '18px',
         xl: '20px',
         '2xl': '22px',
-        '3xl': '36px',
+        '3xl': '26px',
       },
       spacing: {
-        'paddingButtons': '11px 20px',  // Corrección del nombre de la clase
+        'paddingButtons': '11px 20px',  //
       },
     },
   },
