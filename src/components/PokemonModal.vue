@@ -29,6 +29,22 @@ const props = defineProps({
 const pokemonTypes = computed(() => {
   return props.pokemon.types.map((typeObject) => typeObject.type.name);
 });
+
+const sharePokemon = () => {
+  const pokemonName = props.pokemon.name;
+  const abilities = props.pokemon.abilities.map(a => a.ability.name).join(', ');
+
+  const details = `Name: ${pokemonName}, Abilities: ${abilities}`;
+
+  navigator.clipboard.writeText(details)
+    .then(() => {
+      console.log('Copied to clipboard successfully!');
+    })
+    .catch(err => {
+      console.error('Could not copy text: ', err);
+    });
+};
+
 </script>
 <template>
   <!-- Modal Background -->
@@ -36,10 +52,10 @@ const pokemonTypes = computed(() => {
     v-if="show"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
   >
-<!-- Modal Content -->
-<div
-  class="relative w-[315px] h-auto bg-white shadow-lg rounded-2xl sm:w-[570px] modal-container"
->
+    <!-- Modal Content -->
+    <div
+      class="relative w-[315px] h-auto bg-white shadow-lg rounded-2xl sm:w-[570px] modal-container"
+    >
       <!-- Pokemon Image with Background -->
       <div
         class="relative h-48 overflow-hidden bg-center bg-cover rounded-t-2xl"
@@ -101,7 +117,7 @@ const pokemonTypes = computed(() => {
         <h2
           class="bg-white flex justify-start w-full my-2.5 text-base font-bold text-center capitalize text-gray"
         >
-        <span class="mr-1 font-bold bg-white">Types:</span>
+          <span class="mr-1 font-bold bg-white">Types:</span>
           <span
             v-for="type in pokemonTypes"
             :key="type"
@@ -116,7 +132,8 @@ const pokemonTypes = computed(() => {
         <div class="flex justify-between my-5 bg-white">
           <!-- Share Button -->
           <button
-            class="px-4 py-2 text-white rounded-[60px] bg-primary w-[155pxpx] text-base"
+            class="button-share px-4 py-2 text-white rounded-[60px] bg-primary w-[155pxpx] text-base primary-buttons"
+            @click="sharePokemon"
           >
             Share to my friends
           </button>
