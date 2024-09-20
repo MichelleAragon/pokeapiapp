@@ -6,6 +6,7 @@ import SearchPokemon from "./components/SearchPokemon.vue";
 import LoadingSpinner from "./components/LoadingSpinner.vue";
 import FavoritePokemonList from './components/FavoritePokemonList.vue';
 import EmptyList from './components/EmptyList.vue';
+import NavigationButtons from './components/NavigationButtons.vue';
 
 // Data
 const pokemonData = ref([]);
@@ -92,23 +93,12 @@ const showFavoritePokemons = () => {
         />
       </div>
 
-      <!-- Navigation Buttons -->
-      <div class="fixed bottom-0 left-0 right-0 flex justify-around p-4 bg-white shadow-md">
-        <button
-          @click="showAllPokemons"
-          :class="{'bg-primary': currentView === 'all'}"
-          class="px-4 py-2 rounded-md"
-        >
-          ALL
-        </button>
-        <button
-          @click="showFavoritePokemons"
-          :class="{'bg-primary': currentView === 'favorites'}"
-          class="px-4 py-2 rounded-md"
-        >
-          Favorites
-        </button>
-      </div>
+<!-- Navigation Buttons Component -->
+      <NavigationButtons 
+        :currentView="currentView"
+        @showAllPokemons="showAllPokemons"
+        @showFavoritePokemons="showFavoritePokemons"
+      />
     </template>
   </div>
 </template>

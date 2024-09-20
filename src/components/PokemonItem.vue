@@ -31,7 +31,7 @@ const props = defineProps({
       viewBox="0 0 26 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      class="absolute z-20 transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 star-button"
+      class="absolute z-[11] transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 star-button"
       :class="{ 'text-secondary': isFavorite, 'text-disabled': !isFavorite}"
     >
       <path
