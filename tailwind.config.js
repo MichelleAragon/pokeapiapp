@@ -18,7 +18,7 @@ module.exports = {
         white: '#FFFFFF'
       },
       fontFamily: {
-        sans: ['Lato']
+        sans: ['Lato', 'sans-serif'],
       },
       fontSize: {
         sm: '16px',
