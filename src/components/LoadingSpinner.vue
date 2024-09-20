@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex items-center justify-center"
-  >
+  <div class="flex items-center justify-center h-screen">
     <svg
       width="106"
       height="106"
@@ -70,6 +68,7 @@ svg {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 50%;
 }
+
 circle {
   filter: brightness(110%);
 }

@@ -29,7 +29,3 @@ export const getPokemonDetails = async (name) => {
     return null;
   }
 };
-
-// Llama a la función getPokemonByName para obtener los nombres de los primeros 20 pokemones
-getPokemonByName();
-getPokemonDetails();
