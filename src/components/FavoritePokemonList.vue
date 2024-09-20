@@ -5,13 +5,14 @@ import { ref } from 'vue';
 import PokemonModal from './PokemonModal.vue';
 import { defineProps } from 'vue';
 
-const props = defineProps(["favoritePokemons", "addOrRemoveFavorite"]);
+const props = defineProps(["favoritePokemons", "addOrRemoveFavorite", "fetchPokemonDetails"]);
 
 const selectedPokemon = ref(null);
 const isModalVisible = ref(false);
 
-const openModal = (pokemon) => {
-  selectedPokemon.value = pokemon;
+const openModal = async (pokemon) => {
+  const details = await props.fetchPokemonDetails(pokemon.name);
+  selectedPokemon.value = details;
   isModalVisible.value = true;
 };
 

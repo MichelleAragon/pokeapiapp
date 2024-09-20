@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { getPokemonByName } from "./utils/axios";
+import { getPokemonByName, getPokemonDetails } from "./utils/axios";
 import PokemonList from "./components/PokemonsList.vue";
 import SearchPokemon from "./components/SearchPokemon.vue";
 import LoadingSpinner from "./components/LoadingSpinner.vue";
@@ -88,6 +88,7 @@ const showFavoritePokemons = () => {
        <FavoritePokemonList
           :favoritePokemons="selectedFavoritesPokemons"
           :addOrRemoveFavorite="addOrRemoveFavorite"
+          :fetchPokemonDetails="getPokemonDetails"
         />
       </div>
 

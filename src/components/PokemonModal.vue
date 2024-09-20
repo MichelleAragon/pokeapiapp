@@ -1,3 +1,4 @@
+
 <script setup>
 import { defineProps, computed } from "vue";
 
@@ -23,6 +24,11 @@ const props = defineProps({
     required: true,
   },
 });
+
+// Método computado para obtener los nombres de los tipos
+const pokemonTypes = computed(() => {
+  return props.pokemon.types.map(typeObject => typeObject.type.name);
+});
 </script>
 <template>
   <!-- Modal Background -->
@@ -40,17 +46,23 @@ const props = defineProps({
       </button>
 
       <!-- Pokemon Image -->
-      <img alt="Pokemon Image" class="object-contain w-full h-48 mb-4" />
+      <img :src="pokemon.sprites.other['official-artwork'].front_default" alt="Pokemon Image" class="object-contain w-full h-48 mb-4" />
 
       <!-- Pokemon Name -->
-      <!-- <h2 class="w-full mb-4 text-3xl font-bold text-center">{{ pokemon.name }}</h2> -->
+      <h2 class="w-full mb-4 text-3xl font-bold text-center">{{ pokemon.name }}</h2>
+
+            <!-- Pokemon Weight -->
+      <h2 class="w-full mb-4 text-3xl font-bold text-center">{{ pokemon.weight }}</h2>
+
+                  <!-- Pokemon Height -->
+      <h2 class="w-full mb-4 text-3xl font-bold text-center">{{ pokemon.height }}</h2>
 
       <!-- Pokemon Types -->
-      <!-- <p class="w-full mb-4 text-center">
-        <span v-for="type in pokemon.types" :key="type" class="inline-block px-3 py-1 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">
+      <p class="w-full mb-4 text-center">
+        <span v-for="type in pokemonTypes" :key="type" class="inline-block px-3 py-1 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">
           {{ type }}
         </span>
-      </p> -->
+      </p>
 
       <!-- Buttons Row -->
       <div class="flex justify-between">
