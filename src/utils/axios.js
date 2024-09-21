@@ -5,7 +5,7 @@ const baseURL = "https://pokeapi.co/api/v2/pokemon";
 // Función para obtener los nombres de los primeros 20 pokemones
 export const getPokemonByName = async () => {
   try {
-    const response = await axios.get(`${baseURL}?limit=20`);
+    const response = await axios.get(`${baseURL}?limit=100`);
     return response.data.results;
   } catch (error) {
     console.error("Error fetching Pokemon data:", error);

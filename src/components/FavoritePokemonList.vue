@@ -27,7 +27,7 @@ const closeModal = () => {
     <EmptyList />
   </div>
   <div v-else>
-    <ul>
+    <ul class="mb-24">
       <li
         v-for="pokemon in favoritePokemons"
         :key="pokemon.name"

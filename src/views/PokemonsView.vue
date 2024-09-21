@@ -78,6 +78,7 @@ const showFavoritePokemons = () => {
             :pokemonData="pokemonData"
             :selectedFavoritesPokemons="selectedFavoritesPokemons" 
             :addOrRemoveFavorite="addOrRemoveFavorite"
+            :fetchPokemonDetails="getPokemonDetails"
           />
           <EmptyList v-if="pokemonData.length === 0"/>
         </template>

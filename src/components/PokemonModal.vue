@@ -9,7 +9,7 @@ const props = defineProps({
   },
   isFavorite: {
     type: Boolean,
-    required: true,
+    required: false,
   },
   show: {
     type: Boolean,

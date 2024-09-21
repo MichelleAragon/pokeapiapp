@@ -23,7 +23,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <p @click="() => openModal(pokemon)" :class="isFavorite ? 'cursor-pointer' : 'cursor-default'" class="w-full bg-white cursor-pointer">{{ pokemon.name }}</p>
+  <p @click="() => openModal(pokemon)" class="w-full bg-white cursor-pointer">{{ pokemon.name }}</p>
   <button class="relative bg-white right-8" @click="addOrRemoveFavorite(pokemon)">
     <svg
       width="26"
