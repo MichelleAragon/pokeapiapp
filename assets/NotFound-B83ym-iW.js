@@ -1,0 +1,1 @@
+import{_ as n,o as a,c as t,a as e}from"./index-CGPSWKsS.js";const s={name:"NotFound"};function r(c,o,d,l,p,u){return a(),t("div",null,o[0]||(o[0]=[e("h1",null,"404 - Página no encontrada",-1),e("p",null,"Lo sentimos, la página que estás buscando no existe.",-1)]))}const _=n(s,[["render",r],["__scopeId","data-v-a3874259"]]);export{_ as default};
