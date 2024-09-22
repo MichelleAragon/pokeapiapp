@@ -1,6 +1,5 @@
 <script setup>
 import { defineProps, computed } from "vue";
-import Alert from './Alert.vue'
 import backgroundImage from "../assets/mask-image-modal.png";
 
 const props = defineProps({
