@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps, computed } from "vue";
+import Alert from './Alert.vue'
 import backgroundImage from "../assets/mask-image-modal.png";
 
 const props = defineProps({
@@ -38,6 +39,7 @@ const sharePokemon = () => {
 
   navigator.clipboard.writeText(details)
     .then(() => {
+      alert("¡Texto copiado al portapapeles!");
       console.log('Copied to clipboard successfully!');
     })
     .catch(err => {
