@@ -23,10 +23,7 @@ const closeModal = () => {
 </script>
 
 <template>
-  <div v-if="favoritePokemons.length === 0">
-    <EmptyList />
-  </div>
-  <div v-else>
+  <div>
     <ul class="mb-24">
       <li
         v-for="pokemon in favoritePokemons"

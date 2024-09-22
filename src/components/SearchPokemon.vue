@@ -1,30 +1,33 @@
 <script setup>
 import { ref, defineProps, defineEmits, onMounted, watch } from "vue";
-const props = defineProps(['pokemonData']);
+const props = defineProps(['pokemonData', 'favoritePokemons', 'currentView']);
 const emits = defineEmits(['update:searchTerm', 'update:filteredPokemons']);
 const searchTerm = ref('');
 
 const updateSearchTerm = () => {
   emits('update:searchTerm', searchTerm.value);
 };
+
+const filterPokemons = () => {
+  let dataToFilter = props.currentView === 'favorites' ? props.favoritePokemons : props.pokemonData;
+
+  if (!searchTerm.value) {
+    emits('update:filteredPokemons', dataToFilter);
+    return;
+  }
+
+  const filteredPokemons = dataToFilter.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchTerm.value.toLowerCase())
+  );
+
+  emits('update:filteredPokemons', filteredPokemons);
+};
+
 onMounted(() => {
-  const filterPokemons = () => {
-    if (!searchTerm.value) {
-      emits('update:filteredPokemons', props.pokemonData);
-      return;
-    }
-
-    const filteredPokemons = props.pokemonData.filter((pokemon) =>
-      pokemon.name.toLowerCase().includes(searchTerm.value.toLowerCase())
-    );
-
-    emits('update:filteredPokemons', filteredPokemons);
-  };
-
-  watch(searchTerm, filterPokemons);
-
   filterPokemons();
 });
+
+watch(searchTerm, filterPokemons);
 </script>
 
 <template>

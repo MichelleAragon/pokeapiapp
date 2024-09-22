@@ -22,7 +22,6 @@ export const getPokemonDetails = async (name) => {
 
   try {
     const response = await axios.get(`${baseURL}/${name}`);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(`Error fetching details for ${name}:`, error);
